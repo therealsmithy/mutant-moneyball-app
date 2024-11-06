@@ -88,6 +88,13 @@ ppiostreet <- open %>%
                mutate(Decade = gsub('s_oStreet', '', Decade)) %>% 
                select(Member, Alias, Decade, TotalValue_oStreet)
 
+appearancepercentages <- open %>% 
+                         pivot_longer(cols = c(X60s_Appearance_Percent, X70s_Appearance_Percent, X80s_Appearance_Percent, X90s_Appearance_Percent),
+                                   names_to = 'Decade', values_to = 'Appearance_Percent') %>% 
+                         mutate(Decade = gsub('X', '', Decade)) %>% 
+                         mutate(Decade = gsub('s_Appearance_Percent', '', Decade)) %>% 
+                         select(Member, Alias, Decade, Appearance_Percent)
+
 
 # Exploratory Vizzes
 library(ggplot2)
@@ -110,3 +117,4 @@ ggplot(top10appearances, aes(x = numIssues, y = character_name, fill = color_cod
 #saveRDS(ppiheritage, 'G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/ppiheritage.rds')
 #saveRDS(ppiwiz, 'G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/ppiwiz.rds')
 #saveRDS(ppiostreet, 'G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/ppiostreet.rds')
+#saveRDS(appearancepercentages, 'G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/appearancepercentages.rds')
