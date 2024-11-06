@@ -57,7 +57,7 @@ open$Member <- gsub('Remy Le Beau', 'Remy LeBeau', open$Member)
 # Convert columns 23 through 46 to numeric in open after cleaning them
 open[, 23:46] <- lapply(open[, 23:46], function(x) as.numeric(gsub('[^0-9]', '', x)))
 
-# Make it so PPI60s_heritage, PPI70s_heritage, PPI80s_heritage, PPI90s_heritage can be graphed as a time series
+# Create new dataframes for easier graphing
 library(dplyr)
 library(tidyr)
 ppiheritage <- open %>% 
@@ -67,20 +67,19 @@ ppiheritage <- open %>%
                  mutate(Decade = gsub('s_heritage', '', Decade)) %>% 
                  select(Member, Alias, Decade, TotalValue_Heritage)
 
-# Do that for the other three PPI types
 ppiebay <- open %>% 
-            pivot_longer(cols = c(PPI60s_ebay, PPI70s_ebay, PPI80s_ebay, PPI90s_ebay),
-                      names_to = 'Decade', values_to = 'TotalValue_eBay') %>% 
-            mutate(Decade = gsub('PPI', '', Decade)) %>% 
-            mutate(Decade = gsub('s_ebay', '', Decade)) %>% 
-            select(Member, Alias, Decade, TotalValue_eBay)
+                pivot_longer(cols = c(PPI60s_ebay, PPI70s_ebay, PPI80s_ebay, PPI90s_ebay),
+                          names_to = 'Decade', values_to = 'TotalValue_eBay') %>% 
+                mutate(Decade = gsub('PPI', '', Decade)) %>% 
+                mutate(Decade = gsub('s_ebay', '', Decade)) %>% 
+                select(Member, Alias, Decade, TotalValue_eBay)
 
 ppiwiz <- open %>%
-           pivot_longer(cols = c(PPI60s_wiz, PPI70s_wiz, PPI80s_wiz, PPI90s_wiz),
-                     names_to = 'Decade', values_to = 'TotalValue_Wiz') %>% 
-           mutate(Decade = gsub('PPI', '', Decade)) %>% 
-           mutate(Decade = gsub('s_wiz', '', Decade)) %>% 
-           select(Member, Alias, Decade, TotalValue_Wiz)
+               pivot_longer(cols = c(PPI60s_wiz, PPI70s_wiz, PPI80s_wiz, PPI90s_wiz),
+                         names_to = 'Decade', values_to = 'TotalValue_Wiz') %>% 
+               mutate(Decade = gsub('PPI', '', Decade)) %>% 
+               mutate(Decade = gsub('s_wiz', '', Decade)) %>% 
+               select(Member, Alias, Decade, TotalValue_Wiz)
 
 ppiostreet <- open %>% 
                pivot_longer(cols = c(PPI60s_oStreet, PPI70s_oStreet, PPI80s_oStreet, PPI90s_oStreet),
