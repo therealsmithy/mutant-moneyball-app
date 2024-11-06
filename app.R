@@ -12,6 +12,7 @@ ppioStreet <- readRDS('G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyb
 ppiwiz <- readRDS('G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/ppiwiz.rds')
 
 # Define UI for the app
+# The UI should have two rows of two graphs
 ui <- fluidPage(theme = shinytheme("superhero"),
   titlePanel("Mutant Moneyball App"),
   sidebarLayout(
@@ -20,10 +21,14 @@ ui <- fluidPage(theme = shinytheme("superhero"),
                   choices = open$Member)
     ),
     mainPanel(
-      plotOutput("scatterplot1"),
-      plotOutput("scatterplot2"),
-      plotOutput("scatterplot3"),
-      plotOutput("scatterplot4")
+          fluidRow(
+            column(6, plotOutput("scatterplot1")),
+            column(6, plotOutput("scatterplot2"))
+          ),
+          fluidRow(
+            column(6, plotOutput("scatterplot3")),
+            column(6, plotOutput("scatterplot4"))
+          )
     )
   )
 )
