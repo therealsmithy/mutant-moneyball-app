@@ -118,3 +118,4 @@ ggplot(top10appearances, aes(x = numIssues, y = character_name, fill = color_cod
 #saveRDS(ppiwiz, 'G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/ppiwiz.rds')
 #saveRDS(ppiostreet, 'G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/ppiostreet.rds')
 #saveRDS(appearancepercentages, 'G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/appearancepercentages.rds')
+#write.csv(open, 'G:/My Drive/R Projects/mutant-moneyball-app/mutant-moneyball-app/data/open.csv')
